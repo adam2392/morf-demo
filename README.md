@@ -1,20 +1,16 @@
-# Neural Fragility In IEEG Data
+Manifold Oblique Random Forests Demonstration on Simulated and Example Datasets
+===============================================================================
 
-A repository for generating figures for "Neural Fragility of iEEG as a marker for the seizure onset zone".
-Notebooks use some helper functions from a private repository, but all figures to be generated for 
-publication can be found in the `data/` directory.
+This project reproduces some of the simulation and example data results in the [MORF paper](https://arxiv.org/abs/1909.11799).
 
-For a demo of the neural fragility algorithm on a single subject, contact 
-authors for the Gigantum demo.
+This will produce examples of:
 
-[![bioRXiv](https://img.shields.io/badge/arXiv-862797-red.svg)](https://www.biorxiv.org/content/10.1101/862797v4)
+1. simulation examples (see paper and notebooks for full details)
+2. neural fragility seizure outcome classification
+3. sEEG time series to classify movement from non-motor brain regions
 
-Data Organization
------------------
-
-Data should be organized in the BIDS-iEEG format:
-
-https://github.com/bids-standard/bids-specification/blob/master/src/04-modality-specific-files/04-intracranial-electroencephalography.md
+Primarily, you should refer to the ``notebooks/`` to look at experiments
+rendered.
 
 System Requirements
 ===================
@@ -34,29 +30,43 @@ Installation Guide
 ==================
 
 Setup environment from pipenv. The `Pipfile` contains the Python 
-libraries needed to run the figure generation in [notebook](neural_fragility_journal_figures.ipynb).
+libraries needed to run the figure generation in [notebook](./notebooks/plot_morf_clf_comparisons.ipynb).
 
-.. code-block::
 
-   pipenv install --dev
+    pipenv install --dev
+    
+    # use pipenv to install private repo
+    pipenv install -e git+git@github.com:adam2392/eztrack
+    
+    # or
+    pipenv install -e /Users/adam2392/Documents/eztrack
 
-   # use pipenv to install private repo
-   pipenv install -e git+git@github.com:adam2392/eztrack
-
-   # or
-   pipenv install -e /Users/adam2392/Documents/eztrack
-
-   # if dev versions are needed
+    # if dev versions are needed
     pipenv install https://api.github.com/repos/mne-tools/mne-bids/zipball/master --dev
     pipenv install https://api.github.com/repos/mne-tools/mne-python/zipball/master --dev
-
-Demo
-====
-We can send a demo of fragility being run on a patient, (namely Patient_01 in paper).
-The code and demo is not open-source due to license restrictions.
-Please contact authors if interested.
 
 Instructions for Use
 ====================
 Run the notebook from beginning to end to generate figures, 
-by pointing the path to the `data/` folder here.
+by pointing the path to the `data/` folder here. To setup an ipykernel 
+to expose your Python virtual environment to the Jupyter kernel:
+
+    make ipykernel
+
+In order to build ReRF, we use a custom version that is at https://github.com/neurodata/SPORF/pull/353.
+Build the C++ code from that PR, and then run pip install.
+
+    pip install -e <SPORF_DIR>
+
+Neural fragility dataset
+------------------------
+
+See paper for all details: https://www.biorxiv.org/content/10.1101/862797v4
+
+sEEG motor movement in non-motor brain region dataset
+----------------------------------------------------- 
+
+See the following papers for more information.
+
+* [Kerr MSD, Sacré P, Kahn K, Park HJ, Johnson M, Lee J, Thompson S, Bulacio J, Jones J, González-Martínez J, Liégeois-Chauvel C, Sarma SV, Gale JT. The Role of Associative Cortices and Hippocampus during Movement Perturbations. Front Neural Circuits. 2017 Apr 19;11:26. doi: 10.3389/fncir.2017.00026. PMID: 28469563; PMCID: PMC5395558.](https://www.frontiersin.org/articles/10.3389/fncir.2017.00026/full#:~:text=These%20regions%20are%20involved%20during,a%20new%20plan%20to%20compensate)
+* [Breault MS, Fitzgerald ZB, Sacré P, Gale JT, Sarma SV, González-Martínez JA. Non-motor Brain Regions in Non-dominant Hemisphere Are Influential in Decoding Movement Speed. Front Neurosci. 2019 Jul 16;13:715. doi: 10.3389/fnins.2019.00715. PMID: 31379476; PMCID: PMC6660252.](https://pubmed.ncbi.nlm.nih.gov/31379476/)
