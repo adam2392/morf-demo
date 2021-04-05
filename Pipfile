@@ -33,6 +33,7 @@ dabest = "*"
 nb_black = "*"
 tqdm = "*"
 control = "*"
+ptitprince = "*"
 
 [requires]
 python_version = "3.8"
