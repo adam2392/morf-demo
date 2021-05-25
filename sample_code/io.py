@@ -4,8 +4,8 @@ from pathlib import Path
 
 import numpy as np
 import pandas as pd
-from mne_bids import get_entities_from_fname
-from natsort import natsorted
+# from mne_bids import get_entities_from_fname
+# from natsort import natsorted
 
 from sample_code.read_datasheet import read_clinical_excel
 from sample_code.study import _sequential_aggregation
